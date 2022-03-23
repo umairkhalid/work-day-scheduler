@@ -2,8 +2,7 @@
 var now = moment();
 
 // test in non-standard hours
-var nowHour24 = now.format('H');
-var nowHour12 = now.format('h');
+var hour24 = now.format('H');
 
 $(document).ready(function() {
     
@@ -12,6 +11,7 @@ $(document).ready(function() {
     
 });
 
+// function to build and display the calender elements
 function displaySchedule(){
 
     //get the data from local storage
@@ -27,12 +27,11 @@ function displaySchedule(){
         // build row components
         var rowEl = $('<div>');
         rowEl.addClass('row');
-        // rowEl.addClass('plannerRow');
         rowEl.attr('hour-index', hour);
 
         // format hours for display
-        let displayHour = 0;
-        let ampm = "";
+        var displayHour = 0;
+        var ampm = "";
         if (hour > 12) { 
         displayHour = hour - 12;
         ampm = "pm";
@@ -71,32 +70,33 @@ function displaySchedule(){
         updateRowColor(textEl, hour);
 
         // add row to planner container
-        containerEl.append(rowEl);    
+        containerEl.append(rowEl);
+
+        // event listener to save the task to local storage
+        buttonEl.on('click', storePlanData);
     };
-
-    // saves to local storage
-    // conclick function to listen for user clicks on plan area
-    $(document).on('click', 'button', function(event) {
-        event.preventDefault();  
-
-        let $index = $(this).attr('save-id');
-
-        let inputId = '#input-'+$index;
-        let $value = $(inputId).val();
-
-        planTextArr[$index] = $value;
-
-        storeData()
-    });  
-
 }
+
+// function to save the task to local storage
+function storePlanData (event) {
+    event.preventDefault();  
+
+    let $index = $(this).attr('save-id');
+
+    let inputId = '#input-'+$index;
+    let $value = $(inputId).val();
+
+    planTextArr[$index] = $value;
+
+    storeData()
+}  
 
 // function to update row color
 function updateRowColor (hourRow, hour) {
         
-    if ( hour < nowHour24) {
+    if ( hour < hour24) {
         hourRow.addClass('past');
-    } else if ( hour > nowHour24) {
+    } else if ( hour > hour24) {
         hourRow.addClass('future');
     } else {
         hourRow.addClass('present');
