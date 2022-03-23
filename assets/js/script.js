@@ -2,12 +2,19 @@
 var now = moment();
 
 // test in non-standard hours
-var nowHour24 = moment().format('H');
-var nowHour12 = moment().format('h');
+var nowHour24 = now.format('H');
+var nowHour12 = now.format('h');
 
 $(document).ready(function() {
     
     getDate();
+    displaySchedule();
+    
+});
+
+function displaySchedule(){
+
+    //get the data from local storage
     getStoredData()
 
     // build calendar by row for fix set of hours
@@ -67,18 +74,6 @@ $(document).ready(function() {
         containerEl.append(rowEl);    
     };
 
-    // function to update row color
-    function updateRowColor (hourRow, hour) {
-        
-        if ( hour < nowHour24) {
-            hourRow.addClass('past');
-        } else if ( hour > nowHour24) {
-            hourRow.addClass('future');
-        } else {
-            hourRow.addClass('present');
-        }
-    };
-
     // saves to local storage
     // conclick function to listen for user clicks on plan area
     $(document).on('click', 'button', function(event) {
@@ -93,7 +88,20 @@ $(document).ready(function() {
 
         storeData()
     });  
-});
+
+}
+
+// function to update row color
+function updateRowColor (hourRow, hour) {
+        
+    if ( hour < nowHour24) {
+        hourRow.addClass('past');
+    } else if ( hour > nowHour24) {
+        hourRow.addClass('future');
+    } else {
+        hourRow.addClass('present');
+    }
+};
 
 function getDate() {
     var currentDate = now.format('ddd, MMM Do YYYY');
