@@ -81,12 +81,12 @@ function displaySchedule(){
 function storePlanData (event) {
     event.preventDefault();  
 
-    let $index = $(this).attr('save-id');
+    var index = $(this).attr('save-id');
 
-    let inputId = '#input-'+$index;
-    let $value = $(inputId).val();
+    var inputId = '#input-' + index;
+    var value = $(inputId).val();
 
-    planTextArr[$index] = $value;
+    planTextArr[index] = value;
 
     storeData()
 }  
