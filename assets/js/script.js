@@ -2,7 +2,8 @@
 var now = moment();
 
 // test in non-standard hours
-var hour24 = now.format('H');
+var currentHour = now.format('H');
+
 
 var planTextArr = new Array(9);
 
@@ -101,9 +102,9 @@ function storePlanData (event) {
 // function to update row color
 function updateRowColor (hourRow, hour) {
         
-    if ( hour < hour24) {
+    if ( hour < currentHour) {
         hourRow.addClass('past');
-    } else if ( hour > hour24) {
+    } else if ( hour > currentHour) {
         hourRow.addClass('future');
     } else {
         hourRow.addClass('present');
