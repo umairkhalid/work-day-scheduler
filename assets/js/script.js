@@ -17,13 +17,7 @@ $(document).ready(function() {
 // function to build and display the calender elements
 function displaySchedule(){
 
-    //get the data from local storage
-    var storedPlans = localStorage.getItem("storedPlans");
-
-    // If plans were retrieved from localStorage, update the plan array to it
-    if (storedPlans) {
-        planTextArr = JSON.parse(storedPlans);
-    }
+    getStoredData()
 
     // build calendar by row for fix set of hours
     for (var hour = 9; hour <= 17; hour++) {
@@ -120,11 +114,11 @@ function storeData() {
     localStorage.setItem("storedPlans", JSON.stringify(planTextArr));
 }
 
-// function getStoredData() {
-//     var storedPlans = localStorage.getItem("storedPlans");
+function getStoredData() {
+    var storedPlans = localStorage.getItem("storedPlans");
 
-//     // If plans were retrieved from localStorage, update the plan array to it
-//     if (storedPlans) {
-//         planTextArr = JSON.parse(storedPlans);
-//     }
-// }
+    // If plans were retrieved from localStorage, update the plan array to it
+    if (storedPlans) {
+        planTextArr = JSON.parse(storedPlans);
+    }
+}
