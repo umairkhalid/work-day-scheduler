@@ -37,4 +37,4 @@ https://umairkhalid.github.io/work-day-scheduler/
 
 
 - - -
-© 2022 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
+© 2022 Umair Khalid. Confidential and Proprietary. All Rights Reserved.
