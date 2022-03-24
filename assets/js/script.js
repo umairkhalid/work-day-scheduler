@@ -15,11 +15,11 @@ $(document).ready(function() {
 function displaySchedule(){
 
     //get the data from local storage
-    var storedPlans = localStorage.getItem("storedPlans");
+    var planTextArr = localStorage.getItem("storedPlans");
 
     // If plans were retrieved from localStorage, update the plan array to it
-    if (storedPlans) {
-        planTextArr = JSON.parse(storedPlans);
+    if (planTextArr) {
+        storedPlans = JSON.parse(planTextArr);
     }
 
     // build calendar by row for fix set of hours
@@ -60,7 +60,7 @@ function displaySchedule(){
         textEl.addClass('user-entry col border description');
 
         // access index from data array for hour 
-        textEl.val( planTextArr[index] );
+        textEl.val( storedPlans[index] );
 
         // START building save portion of row
         let buttonEl = $('<button>');
@@ -91,7 +91,7 @@ function storePlanData (event) {
     var inputId = '#input-' + index;
     var value = $(inputId).val();
 
-    planTextArr[index] = value;
+    storedPlans[index] = value;
 
     storeData()
 }  
@@ -114,7 +114,7 @@ function getDate() {
 }
 
 function storeData() {
-    localStorage.setItem("storedPlans", JSON.stringify(planTextArr));
+    localStorage.setItem("storedPlans", JSON.stringify(storedPlans));
 }
 
 // function getStoredData() {
